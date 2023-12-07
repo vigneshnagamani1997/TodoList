@@ -1,0 +1,33 @@
+<h2>Todo List</h2>
+<section class="container">
+        <div class="divcontainer">
+            <input type="text" [(ngModel)]="todoTitle" placeholder="Enter Todo Title">
+            <button type="button" (click)="addTodoList()">Add To todo</button>
+        </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of todoList">
+                <td [ngClass]="{'bgDone': row.completed}">{{ row.title }}</td>
+                <td>{{ (!row.completed) ? 'Not'  : ''}} Completed</td>
+                <td>
+                    <button type="button" (click)="row.completed = !row.completed;">
+                        Mark as {{ (!row.completed) ? 'Not'  : ''}} Done
+                    </button>
+                    <button type="button" (click)="removeTodoList(row)">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+            <tr *ngIf="!this.todoList.length">
+                <td colspan="3">No Todo List Found</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
